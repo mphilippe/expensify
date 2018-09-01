@@ -1,36 +1,56 @@
 const path = require('path');
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
-module.exports = {
-  entry: './src/app.js',
-  output: {
-    path: path.join(__dirname, 'public'),
-    filename: 'bundle.js'
-  },
-  module: {
-    rules: [
-      {
-        test: /\.js/,
-        use: {
-          loader: 'babel-loader'
+module.exports = (env, args) => {
+  const isProduction = env === 'production';
+  const CSSExtract = new MiniCssExtractPlugin({
+    filename: 'styles.css'
+  });
+
+  return {
+    entry: './src/app.js',
+    output: {
+      path: path.join(__dirname, 'public'),
+      filename: 'bundle.js'
+    },
+    module: {
+      rules: [
+        {
+          test: /\.js/,
+          use: {
+            loader: 'babel-loader'
+          },
+          exclude: /node_modules/
         },
-        exclude: /node_modules/
-      },
-      {
-        test: /\.scss/,
-        use:[ "style-loader", "css-loader", "sass-loader" ]
-      },
-      {
-        test: /\.css/,
-        use:[ "style-loader", "css-loader" ]
-      }
+        {
+          test: /\.s?css/,
+          use: [
+            !isProduction ? 'style-loader' : MiniCssExtractPlugin.loader,
+            {
+              loader: 'css-loader',
+              options: {
+                sourceMap: true
+              }
+            },
+            {
+              loader: 'sass-loader',
+              options: {
+                sourceMap: true
+              }
+            }
+          ]
+        }
+      ]
+    },
+    devtool: isProduction ? 'source-map' : 'inline-source-map',
+    devServer: {
+      contentBase: path.join(__dirname, 'public'),
+      historyApiFallback: true,
+      stats: 'errors-only',
+      noInfo: true
+    },
+    plugins: [
+      CSSExtract
     ]
-  },
-  devtool: 'cheap-module-eval-source-map',
-  devServer: {
-    contentBase: path.join(__dirname, 'public'),
-    historyApiFallback: true,
-    stats: 'errors-only',
-    noInfo: true
-  }
+  };
 };

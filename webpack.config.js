@@ -10,7 +10,7 @@ module.exports = (env, args) => {
   return {
     entry: './src/app.js',
     output: {
-      path: path.join(__dirname, 'public'),
+      path: path.join(__dirname, 'public', 'dist'),
       filename: 'bundle.js'
     },
     module: {
@@ -46,6 +46,7 @@ module.exports = (env, args) => {
     devServer: {
       contentBase: path.join(__dirname, 'public'),
       historyApiFallback: true,
+      publicPath: '/dist/',
       stats: 'errors-only',
       noInfo: true
     },

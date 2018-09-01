@@ -5,10 +5,10 @@
   "author": "Andrew Mead",
   "license": "MIT",
   "scripts": {
-    "serve": "live-server public/",
     "build:dev": "webpack",
     "build:prod": "webpack -p --env production",
     "dev-server": "webpack-dev-server --no-info",
+    "start": "node server/server.js",
     "test": "jest --config=jest.config.json"
   },
   "dependencies": {
@@ -20,7 +20,7 @@
     "babel-preset-env": "1.5.2",
     "babel-preset-react": "6.24.1",
     "css-loader": "0.28.4",
-    "live-server": "^1.2.0",
+    "express": "^4.16.3",
     "moment": "^2.22.2",
     "node-sass": "4.5.3",
     "normalize.css": "7.0.0",
@@ -37,8 +37,7 @@
     "uuid": "^3.3.2",
     "validator": "8.0.0",
     "webpack": "^4.16.5",
-    "webpack-cli": "^3.1.0",
-    "webpack-dev-server": "^3.1.5"
+    "webpack-cli": "^3.1.0"
   },
   "devDependencies": {
     "enzyme": "^3.5.0",
@@ -46,8 +45,10 @@
     "enzyme-to-json": "^3.3.4",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^23.5.0",
+    "live-server": "^1.2.0",
     "mini-css-extract-plugin": "^0.4.2",
     "raf": "^3.4.0",
-    "react-test-renderer": "^16.4.2"
+    "react-test-renderer": "^16.4.2",
+    "webpack-dev-server": "^3.1.5"
   }
 }

@@ -11,9 +11,9 @@ exports[`Should render ExpenseListItem with an expense 1`] = `
     </Link>
   </h3>
   <p>
-    0
-     - 
-    6000
+    ₱60
+    -
+    01-01-1970
   </p>
   <button
     onClick={[Function]}

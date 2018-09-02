@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 import numeral from 'numeral';
-import { removeExpense } from '../actions/expenses';
 import '../config/numeral.js';
+import { removeExpense } from '../actions/expenses';
 
 export const ExpenseListItem = ({ id, description, note, amount, createdAt, dispatch }) => (
   <div>

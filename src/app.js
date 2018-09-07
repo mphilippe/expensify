@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import AppRouter from './routers/AppRouter';
 import configureStore from './store/configureStore';
 import { addExpense } from './actions/expenses';
+import './firebase/firebase';
 import 'react-dates/initialize';
 
 import 'normalize.css/normalize.css';

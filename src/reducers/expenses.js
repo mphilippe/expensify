@@ -26,6 +26,10 @@ export default (state = expensesReducerDefaultState, action) => {
       return state.filter(({ id }) => id !== action.id);
       break;
     
+    case 'SET_EXPENSES':
+      return action.expenses;
+      break;
+  
     default:
       return state;
   }

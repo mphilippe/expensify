@@ -12,22 +12,4 @@ const config = {
 firebase.initializeApp(config);
 const db = firebase.database();
 
-export { db as default };
-
-// db.ref('expenses').push({
-//   description: 'Expense 1',
-//   note: '',
-//   amount: 45000,
-//   createdAt: 0
-// });
-
-// db.ref('expenses').on('value', (snapshot) => {
-//   const expenses = [];
-//   snapshot.forEach((childSnapshot) => {
-//     expenses.push({
-//       id: childSnapshot.key,
-//       ...childSnapshot.val()
-//     });
-//   });
-//   console.log(expenses);
-// });
+export { db as default, firebase };

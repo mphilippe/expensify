@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import moment from 'moment';
 import numeral from 'numeral';
 import '../config/numeral.js';
-import { removeExpense } from '../actions/expenses';
+import { startRemoveExpense } from '../actions/expenses';
 
 export const ExpenseListItem = ({ id, description, note, amount, createdAt, dispatch }) => (
   <div>
@@ -18,7 +18,7 @@ export const ExpenseListItem = ({ id, description, note, amount, createdAt, disp
       {moment(createdAt).format('DD-MM-YYYY')}
     </p>
     <button onClick={(e) => {
-      dispatch(removeExpense({
+      dispatch(startRemoveExpense({
         id
       }));
     }}>Remove</button>

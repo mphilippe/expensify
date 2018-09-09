@@ -6,7 +6,8 @@ export const addExpense = (expense) => ({
 });
 
 export const startAddExpense = (expenseData = {}) => {
-  return (dispatch) => {
+  return (dispatch, getState) => {
+    const uid = getState().auth.uid;
     const {
       description = '',
       note = '',
@@ -17,7 +18,7 @@ export const startAddExpense = (expenseData = {}) => {
     // console.log(expense);
     
     //Returned for promise chaining > testing
-    return db.ref('expenses').push(expense).then((ref) => {
+    return db.ref(`users/${uid}/expenses`).push(expense).then((ref) => {
       dispatch(addExpense({
         id: ref.key,
         ...expense
@@ -27,8 +28,9 @@ export const startAddExpense = (expenseData = {}) => {
 };
 
 export const startEditExpense = (id, updates) => {
-  return (dispatch) => {
-    return db.ref(`expenses/${id}`).update(updates)
+  return (dispatch, getState) => {
+    const uid = getState().auth.uid;
+    return db.ref(`users/${uid}/expenses/${id}`).update(updates)
       .then(() => {
         dispatch(editExpense(id, updates));
       });
@@ -42,8 +44,9 @@ export const editExpense = (id, updates) => ({
 });
 
 export const startRemoveExpense = ({ id } = {}) => {
-  return (dispatch) => {
-    return db.ref(`expenses/${id}`).remove()
+  return (dispatch, getState) => {
+    const uid = getState().auth.uid;
+    return db.ref(`users/${uid}/expenses/${id}`).remove()
       .then(() => {
         dispatch(removeExpense({ id }));
       });
@@ -61,8 +64,9 @@ export const setExpenses = (expenses) => ({
 });
 
 export const startSetExpenses = () => {
-  return (dispatch) => {
-    return db.ref('expenses').once('value')
+  return (dispatch, getState) => {
+    const uid = getState().auth.uid;
+    return db.ref(`users/${uid}/expenses`).once('value')
       .then((snapshot) => {
         const expenses = [];
 

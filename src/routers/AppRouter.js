@@ -1,28 +1,32 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { Router, Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
+import createBrowserHistory from 'history/createBrowserHistory';
 
-import Header from '../components/Header';
 import ExpenseDashboardPage from '../components/ExpenseDashboardPage';
 import AddExpensePage from '../components/AddExpensePage';
 import EditExpensePage from '../components/EditExpensePage';
 import HelpPage from '../components/HelpPage';
+import LoginPage from '../components/LoginPage';
 import NotFoundPage from '../components/NotFoundPage';
+import PrivateRoute from './PrivateRoute';
 
-const AppRouter = ({ store }) => (
+export const history = createBrowserHistory();
+
+export const AppRouter = ({ store }) => (
   <Provider store={store}>
-    <BrowserRouter>
+    <Router history={history}>
       <div>
-        <Header/>
         <Switch>
-          <Route path="/" component={ExpenseDashboardPage} exact={true}/>
-          <Route path="/create" component={AddExpensePage}/>
-          <Route path="/edit/:id" component={EditExpensePage}/>
-          <Route path="/help" component={HelpPage}/>
-          <Route component={NotFoundPage}/>
+          <Route path="/" component={LoginPage} exact={true} />
+          <PrivateRoute path="/expenses" component={ExpenseDashboardPage} />
+          <PrivateRoute path="/create" component={AddExpensePage} />
+          <PrivateRoute path="/edit/:id" component={EditExpensePage} />
+          <Route path="/help" component={HelpPage} />
+          <Route component={NotFoundPage} />
         </Switch>
       </div>
-    </BrowserRouter>
+    </Router>
   </Provider>
 );
 

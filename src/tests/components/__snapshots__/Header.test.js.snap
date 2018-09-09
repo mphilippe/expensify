@@ -9,7 +9,7 @@ exports[`Should render the Header 1`] = `
     activeClassName="is-active"
     aria-current="page"
     exact={true}
-    to="/"
+    to="/expenses"
   >
     Go gome
   </NavLink>
@@ -29,5 +29,10 @@ exports[`Should render the Header 1`] = `
   >
     Help
   </NavLink>
+  <button
+    onClick={[MockFunction]}
+  >
+    Logout
+  </button>
 </header>
 `;
